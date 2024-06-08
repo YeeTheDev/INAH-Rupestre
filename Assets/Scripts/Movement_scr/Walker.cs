@@ -1,5 +1,6 @@
 using UnityEngine;
 using INAH.Rupestre.Animations;
+using INAH.Rupestre.Statistics;
 
 namespace INAH.Rupestre.Movement
 {

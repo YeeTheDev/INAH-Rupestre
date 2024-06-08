@@ -1,4 +1,5 @@
 using UnityEngine;
+using INAH.Rupestre.Inventories;
 
 namespace INAH.Rupestre.Interactions
 {
