@@ -1,17 +1,32 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Walker))]
+[RequireComponent(typeof(Interactor))]
 public class Controller : MonoBehaviour
 {
-    Walker walker;
     Vector3 controlAxis;
+
+    Walker walker;
+    Interactor interactor;
 
     private void Awake()
     {
         walker = GetComponent<Walker>();
+        interactor = GetComponent<Interactor>();
     }
 
     private void Update()
+    {
+        ReadControlAxis();
+        ReadJButton();
+    }
+
+    private void FixedUpdate()
+    {
+        if (controlAxis != Vector3.zero) { walker.CheckIfCliff(controlAxis); }
+    }
+
+    private void ReadControlAxis()
     {
         controlAxis.x = Input.GetAxis("Horizontal");
         controlAxis.z = Input.GetAxis("Vertical");
@@ -19,8 +34,8 @@ public class Controller : MonoBehaviour
         if (Mathf.RoundToInt(controlAxis.sqrMagnitude) > 0) { controlAxis.Normalize(); }
     }
 
-    private void FixedUpdate()
+    private void ReadJButton()
     {
-        if (controlAxis != Vector3.zero) { walker.CheckIfCliff(controlAxis); }
+        if (Input.GetKeyDown(KeyCode.J)) { interactor.TryToInteract(); }
     }
 }
