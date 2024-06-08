@@ -5,13 +5,21 @@ namespace INAH.Rupestre.Interactions
 {
     public class Interactor : MonoBehaviour
     {
-        List<Interactable> interactables = new List<Interactable>();
+        Inventory inventory;
+        List<Interactable> interactables;
+
+        private void Awake()
+        {
+            inventory = GetComponent<Inventory>();
+            interactables = new List<Interactable>();
+        }
 
         public void TryToInteract()
         {
             if (interactables.Count > 0 && TryInteractableByPriority(out Interactable toInteract))
             {
                 if (toInteract.DestroysOnInteraction) { RemoveByIndex(toInteract.transform); }
+                if (toInteract.IsAnItem) { inventory.AddToInventory(toInteract); }
                 toInteract.Interact(transform);
             }
         }

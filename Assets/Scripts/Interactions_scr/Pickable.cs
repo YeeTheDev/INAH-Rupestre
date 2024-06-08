@@ -4,11 +4,20 @@ namespace INAH.Rupestre.Interactions
 {
     public class Pickable : Interactable
     {
-        [SerializeField] bool canPickUp;
+        [SerializeField] Transform mesh;
+        [SerializeField] Item item;
+
+        public Item GetItem => item;
 
         public override void Interact(Transform player)
         {
-            Destroy(gameObject);
+            canInteract = false;
+        }
+
+        public Transform DetachMesh()
+        {
+            mesh.parent = null;
+            return mesh;
         }
     }
 }
