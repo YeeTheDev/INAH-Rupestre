@@ -5,8 +5,10 @@ namespace INAH.Rupestre.Animations
 {
     public class Animater : MonoBehaviour
     {
+        [Header("Rotation animation")]
         [SerializeField] float rotationSpeed;
         [SerializeField] Transform meshTransform;
+        [Header("Pick up animation")]
         [SerializeField] float pickUpTime;
         [SerializeField] Transform backpackCollectPoint;
         [SerializeField] AnimationCurve curve;
