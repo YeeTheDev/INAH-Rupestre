@@ -158,9 +158,9 @@ MonoBehaviour:
   canInteract: 1
   isAnItem: 1
   destroysOnInteraction: 1
-  mesh: {fileID: 2017896703}
   item:
-    name: 
+    name: 3
+  mesh: {fileID: 2017896703}
 --- !u!65 &17692786
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1405,9 +1405,9 @@ MonoBehaviour:
   canInteract: 1
   isAnItem: 1
   destroysOnInteraction: 1
-  mesh: {fileID: 175932328}
   item:
-    name: 
+    name: 1
+  mesh: {fileID: 175932328}
 --- !u!65 &1703045361
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1501,9 +1501,9 @@ MonoBehaviour:
   canInteract: 1
   isAnItem: 1
   destroysOnInteraction: 1
-  mesh: {fileID: 805096117}
   item:
-    name: 
+    name: 4
+  mesh: {fileID: 805096117}
 --- !u!65 &1851816959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1597,9 +1597,9 @@ MonoBehaviour:
   canInteract: 1
   isAnItem: 1
   destroysOnInteraction: 1
-  mesh: {fileID: 1204416876}
   item:
-    name: 
+    name: 2
+  mesh: {fileID: 1204416876}
 --- !u!65 &1913169771
 BoxCollider:
   m_ObjectHideFlags: 0

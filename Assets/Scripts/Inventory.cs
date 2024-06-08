@@ -1,6 +1,5 @@
 using UnityEngine;
 using INAH.Rupestre.Animations;
-using INAH.Rupestre.Interactions;
 using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
@@ -10,6 +9,7 @@ public class Inventory : MonoBehaviour
     Animater animater;
 
     public int GetTotalItems => items.Count;
+    public bool HasSpace => items.Count < 12;
 
     private void Awake()
     {
@@ -18,17 +18,9 @@ public class Inventory : MonoBehaviour
         animater = GetComponent<Animater>();
     }
 
-    public void AddToInventory(Interactable interactable)
+    public void AddToInventory(Item item, Transform mesh)
     {
-        Pickable item = (Pickable)interactable;
-        animater.PickUpItem(item.DetachMesh());
-        items.Add(item.GetItem);
-        Destroy(item.gameObject);
+        items.Add(item);
+        animater.PickUpItem(mesh);
     }
-}
-
-[System.Serializable]
-public class Item
-{
-    public string name;
 }

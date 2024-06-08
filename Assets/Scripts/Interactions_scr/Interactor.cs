@@ -5,21 +5,12 @@ namespace INAH.Rupestre.Interactions
 {
     public class Interactor : MonoBehaviour
     {
-        Inventory inventory;
-        List<Interactable> interactables;
-
-        private void Awake()
-        {
-            inventory = GetComponent<Inventory>();
-            interactables = new List<Interactable>();
-        }
+        List<Interactable> interactables = new List<Interactable>();
 
         public void TryToInteract()
         {
             if (interactables.Count > 0 && TryInteractableByPriority(out Interactable toInteract))
             {
-                if (toInteract.DestroysOnInteraction) { RemoveByIndex(toInteract.transform); }
-                if (toInteract.IsAnItem) { inventory.AddToInventory(toInteract); }
                 toInteract.Interact(transform);
             }
         }
@@ -63,7 +54,7 @@ namespace INAH.Rupestre.Interactions
 
         private void OnTriggerExit(Collider other) { if (other.CompareTag("Interactable")) { RemoveByIndex(other.transform); } }
 
-        private void RemoveByIndex(Transform toRemove) => interactables.RemoveAt(GetIndexByTransform(toRemove));
+        public void RemoveByIndex(Transform toRemove) => interactables.RemoveAt(GetIndexByTransform(toRemove));
 
         private int GetIndexByTransform(Transform toCheck)
         {
