@@ -7,16 +7,18 @@ namespace INAH.Rupestre.Movement
     [RequireComponent(typeof(Animater))]
     public class Walker : MonoBehaviour
     {
-        [SerializeField] float speed;
         [SerializeField] float checkUpStartPoint = 0.5f;
         [SerializeField] float checkDownDistance = 0.75f;
         [SerializeField] LayerMask groundMask;
 
+        Stats stats;
         Animater animater;
         Rigidbody rb;
 
         private void Awake()
         {
+            stats = GetComponent<Stats>();
+
             rb = GetComponent<Rigidbody>();
             animater = GetComponent<Animater>();
         }
@@ -31,7 +33,7 @@ namespace INAH.Rupestre.Movement
 
         private void Walk(Vector3 direction)
         {
-            Vector3 velocity = direction * speed;
+            Vector3 velocity = direction * stats.GetSpeed;
             velocity.y = rb.velocity.y;
             rb.velocity = velocity;
         }

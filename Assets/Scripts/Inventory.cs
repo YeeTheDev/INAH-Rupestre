@@ -9,6 +9,8 @@ public class Inventory : MonoBehaviour
 
     Animater animater;
 
+    public int GetTotalItems => items.Count;
+
     private void Awake()
     {
         items = new List<Item>();
