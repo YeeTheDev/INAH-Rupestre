@@ -10,11 +10,10 @@ namespace INAH.Rupestre.Statistics
 
         Inventory inventory;
 
-        private void Awake()
-        {
-            inventory = GetComponent<Inventory>();
-        }
-
         public float GetSpeed => baseSpeed - penaltyPerItem * inventory.GetTotalItems;
+
+        private void Awake() => inventory = GetComponent<Inventory>();
+
+
     }
 }

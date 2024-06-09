@@ -25,9 +25,6 @@ namespace INAH.Rupestre.Inventories
             AdjustBackpackSize();
         }
 
-        private void AdjustBackpackSize()
-        {
-            backpackScaler.localScale = Vector3.one + Vector3.one * scalePerItem * items.Count ;
-        }
+        private void AdjustBackpackSize() => backpackScaler.localScale = Vector3.one + Vector3.one* scalePerItem * items.Count;
     }
 }

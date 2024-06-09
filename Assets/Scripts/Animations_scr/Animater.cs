@@ -16,10 +16,7 @@ namespace INAH.Rupestre.Animations
 
         Animator animator;
 
-        private void Awake()
-        {
-            animator = GetComponent<Animator>();
-        }
+        private void Awake() => animator = GetComponent<Animator>();
 
         public void RotateMesh(Vector3 direction)
         {
@@ -27,10 +24,7 @@ namespace INAH.Rupestre.Animations
             meshTransform.rotation = Quaternion.Lerp(meshTransform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
 
-        public void PickUpItem(Transform item)
-        {
-            StartCoroutine(PickUpAnimation(item));
-        }
+        public void PickUpItem(Transform item) => StartCoroutine(PickUpAnimation(item));
 
         private IEnumerator PickUpAnimation(Transform item)
         {
@@ -47,7 +41,7 @@ namespace INAH.Rupestre.Animations
                 float lerpPoint = time / pickUpTime;
 
                 MoveItem(item, initialPosition, lerpPoint);
-                ScaleItem(item, initialScale, lerpPoint);
+                item.localScale = Vector3.Lerp(initialScale, finalItemScale, lerpPoint);
             }
 
             animator.SetTrigger("PickUp");
@@ -60,11 +54,6 @@ namespace INAH.Rupestre.Animations
             lerpPosition.y = curve.Evaluate(lerpPoint) + lerpPosition.y;
 
             item.position = lerpPosition;
-        }
-
-        private void ScaleItem(Transform item, Vector3 initialScale, float lerpPoint)
-        {
-            item.localScale = Vector3.Lerp(initialScale, finalItemScale, lerpPoint);
         }
     }
 }
