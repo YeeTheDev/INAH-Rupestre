@@ -15,7 +15,7 @@ namespace INAH.Rupestre.Inventories
 
         public int GetTotalItems => items.Count;
         public bool HasSpace => items.Count < 12;
-
+        
         private void Awake() => animater = GetComponent<Animater>();
 
         public void AddToInventory(Item item, Transform mesh)

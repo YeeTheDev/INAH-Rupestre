@@ -26,6 +26,8 @@ namespace INAH.Rupestre.Movement
 
         public void CheckIfCliff(Vector3 controlAxis)
         {
+            if (!stats.HasEnergyToWalk) { return; }
+
             animater.RotateMesh(controlAxis);
 
             Vector3 checkerPoint = transform.position + Vector3.up * checkUpStartPoint + controlAxis;
@@ -37,6 +39,8 @@ namespace INAH.Rupestre.Movement
             Vector3 velocity = direction * stats.GetSpeed;
             velocity.y = rb.velocity.y;
             rb.velocity = velocity;
+
+            stats.DrainEnergy();
         }
     }
 }
