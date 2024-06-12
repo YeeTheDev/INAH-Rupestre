@@ -8,8 +8,8 @@ namespace INAH.Rupestre.Statistics
         [SerializeField] float baseSpeed = 3f;
         [SerializeField] float penaltyPerItem = 0.125f;
         [SerializeField] float totalEnergy = 100f;
-        [SerializeField] float energyPerSecond= 1;
-        [SerializeField] float energyPerItem = 0.083f;
+        [SerializeField] float energyPerSecond= 0.5f;
+        [SerializeField] float energyPerItem = 0.05f;
 
         float currentEnergy;
         Inventory inventory;

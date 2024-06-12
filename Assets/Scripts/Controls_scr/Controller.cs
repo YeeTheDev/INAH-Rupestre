@@ -8,6 +8,7 @@ namespace INAH.Rupestre.Controls
     [RequireComponent(typeof(Interactor))]
     public class Controller : MonoBehaviour
     {
+        bool isStopped;
         Vector3 controlAxis;
 
         Walker walker;
@@ -21,13 +22,13 @@ namespace INAH.Rupestre.Controls
 
         private void Update()
         {
-            ReadControlAxis();
+            if (!isStopped) { ReadControlAxis(); }
             ReadJButton();
         }
 
         private void FixedUpdate()
         {
-            if (controlAxis != Vector3.zero) { walker.CheckIfCliff(controlAxis); }
+            if (!isStopped && controlAxis != Vector3.zero) { walker.CheckIfCliff(controlAxis); }
         }
 
         private void ReadControlAxis()
@@ -40,7 +41,12 @@ namespace INAH.Rupestre.Controls
 
         private void ReadJButton()
         {
-            if (Input.GetKeyDown(KeyCode.J)) { interactor.TryToInteract(); }
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                isStopped = interactor.TryToInteract();
+
+                if (isStopped) { walker.Stop(); }
+            }
         }
     }
 }

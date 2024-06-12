@@ -13,8 +13,13 @@ namespace INAH.Rupestre.Animations
         [SerializeField] Transform backpackCollectPoint;
         [SerializeField] AnimationCurve curve;
         [SerializeField] Vector3 finalItemScale;
+        [Header("Talk animation")]
+        [SerializeField] float rotateTime = 0.25f;
 
+        bool rotated;
         Animator animator;
+
+        public bool Rotated => rotated;
 
         private void Awake() => animator = GetComponent<Animator>();
 
@@ -22,6 +27,22 @@ namespace INAH.Rupestre.Animations
         {
             Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
             meshTransform.rotation = Quaternion.Lerp(meshTransform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        }
+
+        public IEnumerator LookAtTarget(Transform target)
+        {
+            float time = 0;
+            Quaternion lookRotation = Quaternion.LookRotation(target.position - transform.position, Vector3.up);
+
+            while (time < rotateTime)
+            {
+                time += Time.deltaTime;
+                meshTransform.rotation = Quaternion.Lerp(meshTransform.rotation, lookRotation, time / rotateTime);
+
+                yield return new WaitForEndOfFrame();
+            }
+
+            rotated = true;
         }
 
         public void PickUpItem(Transform item) => StartCoroutine(PickUpAnimation(item));

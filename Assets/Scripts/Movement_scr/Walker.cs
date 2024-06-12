@@ -24,6 +24,8 @@ namespace INAH.Rupestre.Movement
             animater = GetComponent<Animater>();
         }
 
+        public void Stop() => rb.velocity = Vector3.zero;
+
         public void CheckIfCliff(Vector3 controlAxis)
         {
             if (!stats.HasEnergyToWalk) { return; }

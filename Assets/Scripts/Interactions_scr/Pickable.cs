@@ -12,11 +12,11 @@ namespace INAH.Rupestre.Interactions
 
         public Item GetItem => item;
 
-        public override void Interact(Transform player)
+        public override bool Interact(Transform player)
         {
             if (inventory == null) { inventory = player.GetComponent<Inventory>(); }
 
-            if (!inventory.HasSpace) { return; }
+            if (!inventory.HasSpace) { return false; }
 
             canInteract = false;
             mesh.parent = null;
@@ -25,6 +25,8 @@ namespace INAH.Rupestre.Interactions
             player.GetComponent<Interactor>().RemoveByIndex(transform);
 
             Destroy(gameObject);
+
+            return false;
         }
     }
 }

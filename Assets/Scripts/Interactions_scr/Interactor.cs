@@ -1,18 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
+using INAH.Rupestre.Animations;
 
 namespace INAH.Rupestre.Interactions
 {
     public class Interactor : MonoBehaviour
     {
+        Animater animater;
         List<Interactable> interactables = new List<Interactable>();
 
-        public void TryToInteract()
+        private void Awake() => animater = GetComponent<Animater>();
+
+        public bool TryToInteract()
         {
             if (interactables.Count > 0 && TryInteractableByPriority(out Interactable toInteract))
             {
-                toInteract.Interact(transform);
+                if (toInteract.Interact(transform))
+                {
+                    if (!animater.Rotated) { StartCoroutine(animater.LookAtTarget(toInteract.transform)); }
+
+                    return true;
+                }
             }
+
+            return false;
         }
 
         private bool TryInteractableByPriority(out Interactable toInteract)
